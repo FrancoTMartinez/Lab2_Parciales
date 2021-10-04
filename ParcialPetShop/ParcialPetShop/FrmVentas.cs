@@ -11,8 +11,8 @@ namespace ParcialPetShop
 
 		private List<Producto> carritoList;
 		private Producto productoCarrito;
+		private Cliente cliente1;
 		private double PrecioFinal = 0;
-		public static string nombre;
 		public static string dni;
 
 		System.Windows.Forms.Timer myTimer;
@@ -21,8 +21,10 @@ namespace ParcialPetShop
 		{
 			InitializeComponent();
 
-			this.lblNombreCliente.Text = nombre;
-			this.lblDni.Text = dni;
+			cliente1 = Cliente.Search(dni);
+			this.lblDni.Text = cliente1.Dni;
+			this.lblSaldo.Text= cliente1.Saldo.ToString();
+			this.lblNombreCliente.Text = cliente1.Nombre;
 			carritoList = new List<Producto>();
 
 			myTimer = new System.Windows.Forms.Timer();
@@ -224,7 +226,7 @@ namespace ParcialPetShop
 		/// <param name="e"></param>
 		private void RealizarCompra(object sender, EventArgs e)
 		{
-			Cliente cliente1 = Cliente.Search(this.lblDni.Text);
+			
 			double precioTotal = double.Parse(txtPrecioTotal.Text);
 
 			if (cliente1.Saldo >= precioTotal)

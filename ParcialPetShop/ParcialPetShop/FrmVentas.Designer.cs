@@ -58,6 +58,9 @@ namespace ParcialPetShop
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.lblNombreCliente = new System.Windows.Forms.Label();
 			this.lblDni = new System.Windows.Forms.Label();
+			this.lblSaldo = new System.Windows.Forms.Label();
+			this.lblPesos = new System.Windows.Forms.Label();
+			this.label1 = new System.Windows.Forms.Label();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewProductos)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewCarrito)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -338,12 +341,45 @@ namespace ParcialPetShop
 			this.lblDni.TabIndex = 33;
 			this.lblDni.Text = "Dni";
 			// 
+			// lblSaldo
+			// 
+			this.lblSaldo.AutoSize = true;
+			this.lblSaldo.ForeColor = System.Drawing.Color.White;
+			this.lblSaldo.Location = new System.Drawing.Point(317, 216);
+			this.lblSaldo.Name = "lblSaldo";
+			this.lblSaldo.Size = new System.Drawing.Size(36, 15);
+			this.lblSaldo.TabIndex = 34;
+			this.lblSaldo.Text = "Saldo";
+			// 
+			// lblPesos
+			// 
+			this.lblPesos.AutoSize = true;
+			this.lblPesos.ForeColor = System.Drawing.Color.White;
+			this.lblPesos.Location = new System.Drawing.Point(266, 216);
+			this.lblPesos.Name = "lblPesos";
+			this.lblPesos.Size = new System.Drawing.Size(13, 15);
+			this.lblPesos.TabIndex = 35;
+			this.lblPesos.Text = "$";
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.ForeColor = System.Drawing.Color.White;
+			this.label1.Location = new System.Drawing.Point(317, 243);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(36, 15);
+			this.label1.TabIndex = 36;
+			this.label1.Text = "Saldo";
+			// 
 			// FrmVentas
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(30)))), ((int)(((byte)(37)))));
 			this.ClientSize = new System.Drawing.Size(805, 471);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.lblPesos);
+			this.Controls.Add(this.lblSaldo);
 			this.Controls.Add(this.lblDni);
 			this.Controls.Add(this.lblNombreCliente);
 			this.Controls.Add(this.pictureBox1);
@@ -391,5 +427,8 @@ namespace ParcialPetShop
 		public System.Windows.Forms.Button btnAgregarAlCarrito;
 		public System.Windows.Forms.Label lblNombreCliente;
 		public System.Windows.Forms.Label lblDni;
+		public System.Windows.Forms.Label lblSaldo;
+		public System.Windows.Forms.Label lblPesos;
+		public System.Windows.Forms.Label label1;
 	}
 }

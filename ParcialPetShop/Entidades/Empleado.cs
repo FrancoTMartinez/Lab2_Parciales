@@ -21,7 +21,7 @@ namespace Entidades
 		public Empleado() {
 		}
 
-		public Empleado(string user, string password,string tipoUsuario, string nombre) :base(user,password, tipoUsuario, nombre)
+		public Empleado(string user, string password,string tipoUsuario, string nombre, string dni) :base(user,password, tipoUsuario, nombre,dni)
 		{
 			idEmpleadoEstatico = idEmpleadoEstatico + 1;
 			this.idEmpleado = idEmpleadoEstatico;
@@ -67,14 +67,22 @@ namespace Entidades
 		/// <param name="user"></param>
 		/// <param name="nombre"></param>
 		/// <returns></returns>
-		public override bool ModificarFromList(int id, string user, string nombre, string password)
+		public override bool ModificarFromList(int id, string user, string nombre, string password, string dni)
 		{
+			foreach (Empleado emp in empleadosList)
+			{
+				if (emp.Dni == dni && emp.idEmpleado != id)
+				{
+					return false;
+				}
+			}
 			foreach (Empleado item in empleadosList)
 			{
 				if (item.IdEmpleado == id)
 				{
 					item.User = user;
 					item.Nombre =nombre;
+					item.Dni = dni;
 					if (password != string.Empty) {
 						item.Password = password;
 					}
@@ -166,5 +174,16 @@ namespace Entidades
 			return str.ToString();
 		}
 
+		public override bool ValidateExistingDNI(string dni)
+		{
+			foreach (Empleado item in empleadosList)
+			{
+				if (item.Dni == dni)
+				{
+					return false;
+				}
+			}
+			return true;
+		}
 	}
 }

@@ -12,14 +12,16 @@ namespace Entidades
 		private string password;
 		private string tipoUsuario;
 		private string nombre;
+		private string dni;
 
 
-		public Usuarios(string user, string password, string tipoUsuario, string nombre)
+		public Usuarios(string user, string password, string tipoUsuario, string nombre, string dni)
 		{
 			this.user = user;
 			this.password = password;
 			this.tipoUsuario = tipoUsuario;
 			this.nombre = nombre;
+			this.dni = dni;
 		}
 
 		public Usuarios() {
@@ -31,11 +33,14 @@ namespace Entidades
 		public string Password { get => password; set => password = value; }
 		public string TipoUsuario { get => tipoUsuario; set => tipoUsuario = value; }
 		public string Nombre { get => nombre; set => nombre = value; }
+		public string Dni { get => dni; set => dni = value; }
 
 
 		abstract public bool AddToList();
 		abstract public bool DeleteFromList(int id);
-		abstract public bool ModificarFromList(int id, string user, string nombre,string password);
+		abstract public bool ModificarFromList(int id,string user, string nombre,string password, string dni);
+
+		abstract public bool ValidateExistingDNI(string dni);
 
 
 	}

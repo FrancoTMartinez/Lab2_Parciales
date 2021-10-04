@@ -32,12 +32,12 @@ namespace ParcialPetShop
 
 			foreach (Administrador item in adminList)
 			{
-				dataGridViewUsuarios.Rows.Add(item.IdAdmin, item.Nombre, item.User, item.TipoUsuario);
+				dataGridViewUsuarios.Rows.Add(item.IdAdmin, item.Nombre, item.User, item.Dni, item.TipoUsuario);
 			}
 			dataGridViewUsuarios.Rows.Add("---", "---", "---", "---");
 			foreach (Empleado item in empleadoList)
 			{
-				dataGridViewUsuarios.Rows.Add(item.IdEmpleado, item.Nombre, item.User, item.TipoUsuario);
+				dataGridViewUsuarios.Rows.Add(item.IdEmpleado, item.Nombre, item.User, item.Dni, item.TipoUsuario);
 			}
 		}
 
@@ -52,16 +52,18 @@ namespace ParcialPetShop
 			if (cmbCredential.Text != string.Empty)
 			{
 				if (Validar.ValidarCadenaTexto(txtNombre.Text) &&
+					Validar.ValidarDNI(txtDni.Text) &&
 					txtUsuario.Text != string.Empty &&
 					txtPassword.Text != string.Empty)
 				{
 
 					if (cmbCredential.Text == EnumeradosUsuarios.Administrador.ToString())
 					{
-						if (Administrador.ValidateExistingUserName(txtUsuario.Text))
+						if (Administrador.ValidateExistingUserName(txtUsuario.Text) &&
+							admin.ValidateExistingDNI(txtDni.Text))
 						{
 
-							Administrador admin = new Administrador(txtUsuario.Text, txtPassword.Text, EnumeradosUsuarios.Administrador.ToString(), txtNombre.Text);
+							Administrador admin = new Administrador(txtUsuario.Text, txtPassword.Text, EnumeradosUsuarios.Administrador.ToString(), txtNombre.Text, txtDni.Text);
 							admin.AddToList();
 
 							Console.Beep();
@@ -72,16 +74,17 @@ namespace ParcialPetShop
 						}
 						else
 						{
-							MessageBox.Show("Nombre de Usuario no disponible.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+							MessageBox.Show("Nombre de Usuario no disponible y/o el dni ya esta registrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 						}
 
 					}
 					else
 					{
-						if (Empleado.ValidateExistingUserName(txtUsuario.Text))
+						if (Empleado.ValidateExistingUserName(txtUsuario.Text) &&
+							empleado.ValidateExistingDNI(txtDni.Text))
 						{
 
-							Empleado empleado = new Empleado(txtUsuario.Text, txtPassword.Text, EnumeradosUsuarios.Empleado.ToString(), txtNombre.Text);
+							Empleado empleado = new Empleado(txtUsuario.Text, txtPassword.Text, EnumeradosUsuarios.Empleado.ToString(), txtNombre.Text, txtDni.Text);
 							empleado.AddToList();
 
 							Console.Beep();
@@ -92,7 +95,7 @@ namespace ParcialPetShop
 						}
 						else
 						{
-							MessageBox.Show("Nombre de Usuario no disponible.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+							MessageBox.Show("Nombre de Usuario no disponible y/o el dni ya esta registrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 						}
 					}
 				}
@@ -164,12 +167,13 @@ namespace ParcialPetShop
 			int.TryParse(dataGridViewUsuarios.CurrentRow.Cells["ColumnId"].Value.ToString(), out id);
 
 			if (Validar.ValidarCadenaTexto(txtNombre.Text) &&
+				Validar.ValidarDNI(txtDni.Text) &&
 				txtUsuario.Text != string.Empty)
 			{
 
 				if (this.cmbCredential.SelectedItem.ToString() == EnumeradosUsuarios.Administrador.ToString())
 				{
-					if (admin.ModificarFromList(id, this.txtUsuario.Text, this.txtNombre.Text, this.txtPassword.Text))
+					if (admin.ModificarFromList(id, this.txtUsuario.Text, this.txtNombre.Text, this.txtPassword.Text, this.txtDni.Text))
 					{
 						Console.Beep();
 
@@ -177,10 +181,15 @@ namespace ParcialPetShop
 						FrmUsuarios_Load(sender, e);
 
 					}
+					else
+					{
+						MessageBox.Show("El dni a modificar ya se encuentra registrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
+
 				}
 				else
 				{
-					if (empleado.ModificarFromList(id, this.txtUsuario.Text, this.txtNombre.Text,this.txtPassword.Text))
+					if (empleado.ModificarFromList(id, this.txtUsuario.Text, this.txtNombre.Text, this.txtPassword.Text, this.txtDni.Text))
 					{
 
 						Console.Beep();
@@ -189,6 +198,10 @@ namespace ParcialPetShop
 						FrmUsuarios_Load(sender, e);
 
 					}
+					else {
+						MessageBox.Show("El dni a modificar ya se encuentra registrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
+
 				}
 			}
 			else
@@ -214,21 +227,22 @@ namespace ParcialPetShop
 					dataGridViewUsuarios.Rows.Clear();
 					foreach (Administrador item in adminList)
 					{
-						dataGridViewUsuarios.Rows.Add(item.IdAdmin, item.Nombre, item.User, item.TipoUsuario);
+						dataGridViewUsuarios.Rows.Add(item.IdAdmin, item.Nombre, item.User, item.Dni, item.TipoUsuario);
 					}
 					dataGridViewUsuarios.Rows.Add("---", "---", "---", "---");
 					foreach (Empleado item in empleadoList)
 					{
-						dataGridViewUsuarios.Rows.Add(item.IdEmpleado, item.Nombre, item.User, item.TipoUsuario);
+						dataGridViewUsuarios.Rows.Add(item.IdEmpleado, item.Nombre, item.User, item.Dni, item.TipoUsuario);
 					}
 
 				}
-				else {
+				else
+				{
 					foreach (Administrador item in adminList)
 					{
 						if (item.ToString().Contains(this.txtBuscar.Text))
 						{
-							dataGridViewUsuarios.Rows.Add(item.IdAdmin, item.Nombre, item.User, item.TipoUsuario);
+							dataGridViewUsuarios.Rows.Add(item.IdAdmin, item.Nombre, item.User, item.Dni, item.TipoUsuario);
 						}
 					}
 					dataGridViewUsuarios.Rows.Add("---", "---", "---", "---");
@@ -236,7 +250,7 @@ namespace ParcialPetShop
 					{
 						if (item.ToString().Contains(this.txtBuscar.Text))
 						{
-							dataGridViewUsuarios.Rows.Add(item.IdEmpleado, item.Nombre, item.User, item.TipoUsuario);
+							dataGridViewUsuarios.Rows.Add(item.IdEmpleado, item.Nombre, item.User, item.Dni, item.TipoUsuario);
 						}
 					}
 				}
@@ -254,9 +268,11 @@ namespace ParcialPetShop
 		{
 			if (dataGridViewUsuarios.SelectedRows.Count > 0)
 			{
-				if (Validar.ValidarCadenaTexto(dataGridViewUsuarios.CurrentRow.Cells["ColumnNombre"].Value.ToString())) {
+				if (Validar.ValidarCadenaTexto(dataGridViewUsuarios.CurrentRow.Cells["ColumnNombre"].Value.ToString()))
+				{
 					this.txtNombre.Text = dataGridViewUsuarios.CurrentRow.Cells["ColumnNombre"].Value.ToString();
 					this.txtUsuario.Text = dataGridViewUsuarios.CurrentRow.Cells["ColumnUser"].Value.ToString();
+					this.txtDni.Text = dataGridViewUsuarios.CurrentRow.Cells["ColumnDni"].Value.ToString();
 					this.cmbCredential.SelectedItem = dataGridViewUsuarios.CurrentRow.Cells["ColumnTipoUsuario"].Value.ToString();
 
 					if (this.cmbCredential.SelectedItem.ToString() == EnumeradosUsuarios.Administrador.ToString())
@@ -269,6 +285,7 @@ namespace ParcialPetShop
 					}
 				}
 
+
 			}
 		}
 
@@ -279,7 +296,8 @@ namespace ParcialPetShop
 				this.txtPassword.UseSystemPasswordChar = false;
 				flagPassword = false;
 			}
-			else {
+			else
+			{
 				this.txtPassword.UseSystemPasswordChar = true;
 				flagPassword = true;
 			}
@@ -294,6 +312,7 @@ namespace ParcialPetShop
 			this.txtNombre.Text = string.Empty;
 			this.txtUsuario.Text = string.Empty;
 			this.txtPassword.Text = string.Empty;
+			this.txtDni.Text = string.Empty;
 			this.cmbCredential.SelectedItem = string.Empty;
 		}
 

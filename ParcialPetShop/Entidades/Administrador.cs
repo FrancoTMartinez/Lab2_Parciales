@@ -17,7 +17,7 @@ namespace Entidades
 		
 		}
 
-		public Administrador(string user, string password,string tipoUsuario, string nombre) :base(user, password, tipoUsuario, nombre)
+		public Administrador(string user, string password,string tipoUsuario, string nombre, string dni) :base(user, password, tipoUsuario, nombre, dni)
 		{
 			idAdministrador = idAdministrador + 1;
 			this.idAdmin = idAdministrador;
@@ -62,14 +62,21 @@ namespace Entidades
 		/// <param name="nombre"></param>
 		/// <param name="password"></param>
 		/// <returns></returns>
-		public override bool ModificarFromList(int id, string user, string nombre,string password)
+		public override bool ModificarFromList(int id, string user, string nombre,string password, string dni)
 		{
+			foreach (Administrador admin in adminList)
+			{
+				if (admin.Dni == dni && admin.idAdmin != id) {
+					return false;
+				}
+			}
 			foreach (Administrador item in adminList)
 			{
 				if (item.IdAdmin == id)
 				{
 					item.User = user;
 					item.Nombre = nombre;
+					item.Dni = dni;
 					if (password != string.Empty) {
 						item.Password = password;
 					}
@@ -162,6 +169,18 @@ namespace Entidades
 			foreach (Administrador item in adminList)
 			{
 				if (item.User == user)
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+
+		public override bool ValidateExistingDNI(string dni)
+		{
+			foreach (Administrador item in adminList)
+			{
+				if (item.Dni == dni)
 				{
 					return false;
 				}

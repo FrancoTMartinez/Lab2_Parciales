@@ -34,10 +34,6 @@ namespace ParcialPetShop
 			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmUsuarios));
 			this.dataGridViewUsuarios = new System.Windows.Forms.DataGridView();
-			this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ColumnNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ColumnUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.ColumnTipoUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.btnAgregarUsuario = new System.Windows.Forms.Button();
 			this.btnModificar = new System.Windows.Forms.Button();
 			this.btnEliminar = new System.Windows.Forms.Button();
@@ -53,6 +49,13 @@ namespace ParcialPetShop
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.txtBuscar = new System.Windows.Forms.TextBox();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
+			this.txtDni = new System.Windows.Forms.TextBox();
+			this.lblDni = new System.Windows.Forms.Label();
+			this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ColumnNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ColumnUser = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ColumnDni = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.ColumnTipoUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridViewUsuarios)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -78,6 +81,7 @@ namespace ParcialPetShop
             this.ColumnId,
             this.ColumnNombre,
             this.ColumnUser,
+            this.ColumnDni,
             this.ColumnTipoUsuario});
 			this.dataGridViewUsuarios.EnableHeadersVisualStyles = false;
 			this.dataGridViewUsuarios.GridColor = System.Drawing.Color.Black;
@@ -108,36 +112,12 @@ namespace ParcialPetShop
 			this.dataGridViewUsuarios.TabStop = false;
 			this.dataGridViewUsuarios.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewUsuarios_RowHeaderMouseClick);
 			// 
-			// ColumnId
-			// 
-			this.ColumnId.HeaderText = "Id";
-			this.ColumnId.Name = "ColumnId";
-			this.ColumnId.ReadOnly = true;
-			// 
-			// ColumnNombre
-			// 
-			this.ColumnNombre.HeaderText = "Nombre";
-			this.ColumnNombre.Name = "ColumnNombre";
-			this.ColumnNombre.ReadOnly = true;
-			// 
-			// ColumnUser
-			// 
-			this.ColumnUser.HeaderText = "User";
-			this.ColumnUser.Name = "ColumnUser";
-			this.ColumnUser.ReadOnly = true;
-			// 
-			// ColumnTipoUsuario
-			// 
-			this.ColumnTipoUsuario.HeaderText = "Tipo Usuario";
-			this.ColumnTipoUsuario.Name = "ColumnTipoUsuario";
-			this.ColumnTipoUsuario.ReadOnly = true;
-			// 
 			// btnAgregarUsuario
 			// 
 			this.btnAgregarUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(25)))), ((int)(((byte)(30)))));
 			this.btnAgregarUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
 			this.btnAgregarUsuario.ForeColor = System.Drawing.Color.White;
-			this.btnAgregarUsuario.Location = new System.Drawing.Point(501, 240);
+			this.btnAgregarUsuario.Location = new System.Drawing.Point(501, 273);
 			this.btnAgregarUsuario.Name = "btnAgregarUsuario";
 			this.btnAgregarUsuario.Size = new System.Drawing.Size(257, 28);
 			this.btnAgregarUsuario.TabIndex = 5;
@@ -150,7 +130,7 @@ namespace ParcialPetShop
 			this.btnModificar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(25)))), ((int)(((byte)(30)))));
 			this.btnModificar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
 			this.btnModificar.ForeColor = System.Drawing.Color.White;
-			this.btnModificar.Location = new System.Drawing.Point(519, 280);
+			this.btnModificar.Location = new System.Drawing.Point(519, 313);
 			this.btnModificar.Name = "btnModificar";
 			this.btnModificar.Size = new System.Drawing.Size(225, 28);
 			this.btnModificar.TabIndex = 6;
@@ -163,7 +143,7 @@ namespace ParcialPetShop
 			this.btnEliminar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(25)))), ((int)(((byte)(30)))));
 			this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
 			this.btnEliminar.ForeColor = System.Drawing.Color.White;
-			this.btnEliminar.Location = new System.Drawing.Point(519, 326);
+			this.btnEliminar.Location = new System.Drawing.Point(519, 359);
 			this.btnEliminar.Name = "btnEliminar";
 			this.btnEliminar.Size = new System.Drawing.Size(225, 28);
 			this.btnEliminar.TabIndex = 7;
@@ -205,7 +185,7 @@ namespace ParcialPetShop
 			// 
 			this.lblTipoUsuario.AutoSize = true;
 			this.lblTipoUsuario.ForeColor = System.Drawing.Color.White;
-			this.lblTipoUsuario.Location = new System.Drawing.Point(473, 179);
+			this.lblTipoUsuario.Location = new System.Drawing.Point(473, 212);
 			this.lblTipoUsuario.Name = "lblTipoUsuario";
 			this.lblTipoUsuario.Size = new System.Drawing.Size(70, 15);
 			this.lblTipoUsuario.TabIndex = 7;
@@ -252,7 +232,7 @@ namespace ParcialPetShop
 			this.cmbCredential.Items.AddRange(new object[] {
             "Administrador",
             "Empleado"});
-			this.cmbCredential.Location = new System.Drawing.Point(549, 176);
+			this.cmbCredential.Location = new System.Drawing.Point(549, 209);
 			this.cmbCredential.MaxDropDownItems = 2;
 			this.cmbCredential.Name = "cmbCredential";
 			this.cmbCredential.Size = new System.Drawing.Size(213, 23);
@@ -287,7 +267,7 @@ namespace ParcialPetShop
 			this.txtBuscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(10)))));
 			this.txtBuscar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.txtBuscar.ForeColor = System.Drawing.Color.White;
-			this.txtBuscar.Location = new System.Drawing.Point(531, 392);
+			this.txtBuscar.Location = new System.Drawing.Point(537, 431);
 			this.txtBuscar.Name = "txtBuscar";
 			this.txtBuscar.PlaceholderText = "Buscar";
 			this.txtBuscar.Size = new System.Drawing.Size(213, 23);
@@ -306,12 +286,64 @@ namespace ParcialPetShop
 			this.pictureBox2.TabStop = false;
 			this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
 			// 
+			// txtDni
+			// 
+			this.txtDni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(10)))));
+			this.txtDni.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.txtDni.ForeColor = System.Drawing.Color.White;
+			this.txtDni.Location = new System.Drawing.Point(545, 170);
+			this.txtDni.Name = "txtDni";
+			this.txtDni.Size = new System.Drawing.Size(213, 23);
+			this.txtDni.TabIndex = 16;
+			// 
+			// lblDni
+			// 
+			this.lblDni.AutoSize = true;
+			this.lblDni.ForeColor = System.Drawing.Color.White;
+			this.lblDni.Location = new System.Drawing.Point(473, 172);
+			this.lblDni.Name = "lblDni";
+			this.lblDni.Size = new System.Drawing.Size(27, 15);
+			this.lblDni.TabIndex = 17;
+			this.lblDni.Text = "DNI";
+			// 
+			// ColumnId
+			// 
+			this.ColumnId.HeaderText = "Id";
+			this.ColumnId.Name = "ColumnId";
+			this.ColumnId.ReadOnly = true;
+			// 
+			// ColumnNombre
+			// 
+			this.ColumnNombre.HeaderText = "Nombre";
+			this.ColumnNombre.Name = "ColumnNombre";
+			this.ColumnNombre.ReadOnly = true;
+			// 
+			// ColumnUser
+			// 
+			this.ColumnUser.HeaderText = "User";
+			this.ColumnUser.Name = "ColumnUser";
+			this.ColumnUser.ReadOnly = true;
+			// 
+			// ColumnDni
+			// 
+			this.ColumnDni.HeaderText = "Dni";
+			this.ColumnDni.Name = "ColumnDni";
+			this.ColumnDni.ReadOnly = true;
+			// 
+			// ColumnTipoUsuario
+			// 
+			this.ColumnTipoUsuario.HeaderText = "Tipo Usuario";
+			this.ColumnTipoUsuario.Name = "ColumnTipoUsuario";
+			this.ColumnTipoUsuario.ReadOnly = true;
+			// 
 			// FrmUsuarios
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(30)))), ((int)(((byte)(37)))));
 			this.ClientSize = new System.Drawing.Size(805, 471);
+			this.Controls.Add(this.txtDni);
+			this.Controls.Add(this.lblDni);
 			this.Controls.Add(this.pictureBox2);
 			this.Controls.Add(this.txtBuscar);
 			this.Controls.Add(this.pictureBox1);
@@ -353,13 +385,16 @@ namespace ParcialPetShop
 		private System.Windows.Forms.TextBox txtUsuario;
 		private System.Windows.Forms.TextBox txtPassword;
 		private System.Windows.Forms.ComboBox cmbCredential;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnId;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNombre;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnUser;
-		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTipoUsuario;
 		private System.Windows.Forms.Button btnCerrar;
 		private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.TextBox txtBuscar;
 		private System.Windows.Forms.PictureBox pictureBox2;
+		private System.Windows.Forms.TextBox txtDni;
+		private System.Windows.Forms.Label lblDni;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnId;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNombre;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnUser;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnDni;
+		private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTipoUsuario;
 	}
 }

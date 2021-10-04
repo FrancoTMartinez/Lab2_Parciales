@@ -16,12 +16,12 @@ namespace ParcialPetShop
 		public FrmLogIn()
 		{
 			InitializeComponent();
-			Administrador admin1 = new Administrador("Franco","Franco123","Administrador","Franco Martinez");
-			Administrador admin2 = new Administrador("Belen", "Belen123", "Administrador", "Belen Martinez");
+			Administrador admin1 = new Administrador("Franco","Franco123","Administrador","Franco Martinez","42414141");
+			Administrador admin2 = new Administrador("Belen", "Belen123", "Administrador", "Belen Martinez","45484741");
 			admin1.AddToList();
 			admin2.AddToList();
-			Empleado emp1 = new Empleado("Stefano", "Stefano123", "Empleado", "Stefano Mugetti");
-			Empleado emp2 = new Empleado("Gabriel", "gabyelcrack", "Empleado", "Gabriel Lopez");
+			Empleado emp1 = new Empleado("Stefano", "Stefano123", "Empleado", "Stefano Mugetti","65956863");
+			Empleado emp2 = new Empleado("Gabriel", "gabyelcrack", "Empleado", "Gabriel Lopez", "78757471");
 			emp1.AddToList();
 			emp2.AddToList();
 		}

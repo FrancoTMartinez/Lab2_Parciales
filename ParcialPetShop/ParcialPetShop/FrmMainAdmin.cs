@@ -141,7 +141,6 @@ namespace ParcialPetShop
 			if (frmLogInVentas.ShowDialog() == DialogResult.OK)
 			{
 				FrmVentas.dni = frmLogInVentas.txtDni.Text;
-				FrmVentas.nombre = Cliente.GetNameByDni(frmLogInVentas.txtDni.Text);
 
 				AbrirFormulario<FrmVentas>();
 
